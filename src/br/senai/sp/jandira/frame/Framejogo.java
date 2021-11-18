@@ -140,14 +140,20 @@ public class Framejogo extends JFrame {
 		comboBoxquantidade.setForeground(new Color(240, 248, 255));
 		comboBoxquantidade.setBackground(new Color(75, 0, 130));
 		comboBoxquantidade.setBounds(211, 101, 36, 17);
+		comboBoxquantidade.addItem("1");comboBoxquantidade.addItem("2");
+		comboBoxquantidade.addItem("3");comboBoxquantidade.addItem("4");
+		comboBoxquantidade.addItem("5");
 		getContentPane().add(comboBoxquantidade);
 
-
-		for(QuantidadeZerado vezeszerado : QuantidadeZerado.values()){
+		
+           
+        	   
+		
+		/*for(QuantidadeZerado vezeszerado : QuantidadeZerado.values()){
 			quantidadezerado.addElement(vezeszerado.getzerado());
 			
 		}
-		comboBoxquantidade.setModel(quantidadezerado);
+		comboBoxquantidade.setModel(quantidadezerado);*/
 		
 		/*aqui acaba*/
 	
