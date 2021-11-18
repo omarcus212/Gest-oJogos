@@ -10,7 +10,7 @@ public enum Zerado {
 		this.Zerado = zerado;
 	}
 
-	private String getzerado() {
+	public String getzerado() {
 		return Zerado;
 
 	}

@@ -2,25 +2,31 @@ package br.senai.sp.jandira.jogo;
 
 public enum Consoles {
 
-	Nintendo("Nintendo"),
-	XboxOneS("Xbox One S "),
-	Playstation2("Playstation 2") ,
-	Playstation4("Playstation 4"),
-	NintendoSwitch("Nintendo Switch"),
-	XboxOneX("Xbox One X"),
-	XboxSerieX("Xbox Serie X"),
-	Playstation5("Playstation 5");
+	
+		XBOX("Xbox360"),
+		XBOXONE("Xbox one"),
+		XBOXSERIEX("Xbox X"),
+		PLAYSTATIONONE("Playstation 1"),
+		PLAYSTATIOTWO("Playstation 2"),
+		PLAYSTATIOFOR("Playstation 4"),
+		PLAYSTATIOFIVE("Playstation 5"),
+		PLAYSTATION("Playstation 3"),
+		NITENDO("Nitendo mario");
+		
+	
+	private String consoles;
 
-	private String Consoles;
-	
-	private Consoles(String Consoles) {
-		this.Consoles = Consoles;
+	 private Consoles(String string) {
+		 this.consoles = string;
+		 
+		
 	}
-	
-	
-	private String getconsoles() {
-	    return Consoles;
+	 
+	public String getconsole() {
+		return consoles;
 
 	}
+	 
+
 	
 }

@@ -6,7 +6,7 @@ public class Jogo {
 
 	private String titulo;
 	private FabricanteDoJogo fabrincante;
-	private String zerado;
+	private Zerado zerado;
 	private String console;
 	private String valor;
 	private String observacao;
@@ -27,11 +27,11 @@ public class Jogo {
 		this.fabrincante = fabrincante;
 	}
 
-	public String getZerado() {
+	public Zerado getZerado() {
 		return zerado;
 	}
 
-	public void setZerado(String zerado) {
+	public void setZerado(Zerado zerado) {
 		this.zerado = zerado;
 	}
 
