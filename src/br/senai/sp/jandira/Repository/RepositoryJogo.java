@@ -2,13 +2,14 @@ package br.senai.sp.jandira.Repository;
 
 import br.senai.sp.jandira.jogo.Jogo;
 
+
 public class RepositoryJogo {
 
 	
 	private Jogo[] games; 
 	  
-	private RepositoryJogo() {
-		games = new Jogo[5];
+	public RepositoryJogo() {
+		games = new Jogo[100];
 		
 	}
 	
@@ -21,7 +22,14 @@ public class RepositoryJogo {
 		games[posicao] = jogos;
 	}
 	
+	public int gettamanho() {
+		return games.length; 
+	}
 
+	public Jogo jogoslist(int posiçao){
+		return games[posiçao];
+		
+	}
 	
 	
 	

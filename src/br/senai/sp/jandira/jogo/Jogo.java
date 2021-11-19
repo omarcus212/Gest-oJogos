@@ -7,7 +7,7 @@ public class Jogo {
 	private String titulo;
 	private FabricanteDoJogo fabrincante;
 	private Zerado zerado;
-	private String console;
+	private Consoles console;
 	private String valor;
 	private String observacao;
 
@@ -35,11 +35,11 @@ public class Jogo {
 		this.zerado = zerado;
 	}
 
-	public String getConsole() {
+	public Consoles getConsole() {
 		return console;
 	}
 
-	public void setConsole(String console) {
+	public void setConsole(Consoles console) {
 		this.console = console;
 	}
 

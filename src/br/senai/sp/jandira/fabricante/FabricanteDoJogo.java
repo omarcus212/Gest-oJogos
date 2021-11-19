@@ -6,7 +6,7 @@ public class FabricanteDoJogo {
 	private String local;
 	private String numero;
 	private String email;
-	private String dataDeExposicao;
+	
 
 	public String getNome() {
 		return nome;

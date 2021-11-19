@@ -7,11 +7,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import br.senai.sp.jandira.Repository.RepositoryJogo;
+import br.senai.sp.jandira.Repositoryfabricante.RepositoryFabricante;
 import br.senai.sp.jandira.jogo.Consoles;
-import br.senai.sp.jandira.jogo.Fabricantesjogos;
 import br.senai.sp.jandira.jogo.Jogo;
 import br.senai.sp.jandira.jogo.QuantidadeZerado;
 import br.senai.sp.jandira.jogo.Zerado;
@@ -19,6 +21,7 @@ import br.senai.sp.jandira.jogo.Zerado;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,45 +32,46 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
 
 public class Framejogo extends JFrame {
-	private JTextField textField;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	
+	private JTextField textFieldnome;
+	private JTextField textField_valor;
+	private JTextField obseervçao;
+	private int posicao = 0;
 	
 	public Framejogo() {
 		setTitle("Jogos");
 		getContentPane().setLayout(null);
+		setBounds(100, 100, 500, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		textField = new JTextField();
-		textField.setBounds(102, 39, 143, 17);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textFieldnome = new JTextField();
+		textFieldnome.setBounds(102, 39, 143, 17);
+		getContentPane().add(textFieldnome);
+		textFieldnome.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(97, 164, 86, 17);
-		getContentPane().add(textField_4);
+		textField_valor = new JTextField();
+		textField_valor.setColumns(10);
+		textField_valor.setBounds(111, 164, 86, 17);
+		getContentPane().add(textField_valor);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(85, 192, 160, 69);
-		getContentPane().add(textField_5);
+		obseervçao = new JTextField();
+		obseervçao.setColumns(10);
+		obseervçao.setBounds(102, 192, 160, 69);
+		getContentPane().add(obseervçao);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(272, 39, 127, 214);
 		getContentPane().add(scrollPane);
 		
-		JList listdejogos = new JList();
-		scrollPane.setRowHeaderView(listdejogos);
+		JList listjogos = new JList();
+		scrollPane.setViewportView(listjogos);
 		
 		JLabel lblNewLabel = new JLabel("Nome do jogo:");
 		lblNewLabel.setBounds(10, 41, 95, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblFabricante = new JLabel("Fabricante:");
-		lblFabricante.setBounds(10, 66, 58, 14);
+		lblFabricante.setBounds(10, 66, 73, 14);
 		getContentPane().add(lblFabricante);
 		
 		JLabel lblMeusJogos = new JLabel("Meus Jogos:");
@@ -83,11 +87,11 @@ public class Framejogo extends JFrame {
 		getContentPane().add(lblConsole);
 		
 		JLabel lblValor = new JLabel("Valor estimado:");
-		lblValor.setBounds(13, 165, 74, 14);
+		lblValor.setBounds(10, 166, 95, 14);
 		getContentPane().add(lblValor);
 		
 		JLabel lblObservaes = new JLabel("Observa\u00E7\u00F5es:");
-		lblObservaes.setBounds(10, 192, 74, 14);
+		lblObservaes.setBounds(10, 192, 95, 14);
 		getContentPane().add(lblObservaes);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Quantas Vezes:");
@@ -149,38 +153,23 @@ public class Framejogo extends JFrame {
            
         	   
 		
-		/*for(QuantidadeZerado vezeszerado : QuantidadeZerado.values()){
-			quantidadezerado.addElement(vezeszerado.getzerado());
-			
-		}
-		comboBoxquantidade.setModel(quantidadezerado);*/
 		
 		/*aqui acaba*/
 	
-		
+		String dias[] = { "EA sport", "Microsoft", "Xbox", "ActionVisa", "Sony" };
+
 		
 		JComboBox comboBoxFabrica = new JComboBox();
+		
 		comboBoxFabrica.setFont(new Font("Tahoma", Font.BOLD, 11));
 		comboBoxFabrica.setForeground(new Color(240, 248, 255));
 		comboBoxFabrica.setEditable(true);
 		comboBoxFabrica.setBackground(new Color(75, 0, 130));
-		DefaultComboBoxModel<String> fabricante = new DefaultComboBoxModel<String>();
-		comboBoxFabrica.setBounds(75, 67, 108, 17);
+		 DefaultComboBoxModel<String> conso1les = new DefaultComboBoxModel<String>(dias);
+		 comboBoxFabrica.setModel(conso1les);
+		comboBoxFabrica.setBounds(80, 64, 108, 17);
 		getContentPane().add(comboBoxFabrica);
-		
-		for(Fabricantesjogos f : Fabricantesjogos.values()) {
-			fabricante.addElement(f.getFrabica());
-		}
-		comboBoxFabrica.setModel(fabricante);
-		
-		/*aqui acaba*/
-		
-	    
-	    JScrollPane scrollPane_1 = new JScrollPane();
-	    scrollPane_1.setBounds(194, 67, 68, 17);
-	    getContentPane().add(scrollPane_1);
-	    JList list = new JList();
-	    scrollPane_1.setViewportView(list);
+	    ;
 	    
 
 		/*coloquei o Enum dos consoles para o fda escolher*/
@@ -193,6 +182,7 @@ public class Framejogo extends JFrame {
 	    DefaultComboBoxModel<String> consoles = new DefaultComboBoxModel<String>();
 	    comboBox.setBounds(67, 132, 116, 17);
 	    getContentPane().add(comboBox);
+	  
 	    
 	    for(Consoles c : Consoles.values()) {
 	    	consoles.addElement(c.getconsole());
@@ -204,21 +194,33 @@ public class Framejogo extends JFrame {
 	    	
 	    /*e colocado aqui o action lisener do button salvar */
 	     
-	    
+	    RepositoryJogo joguinho = new RepositoryJogo();
 	    
 btnNewButtonsalvar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-		
+				Jogo jogo = new Jogo();
+		jogo.setTitulo(textFieldnome.getText());
+		jogo.setValor(textField_valor.getText());
+		jogo.setConsole(obterconsole(comboBox.getSelectedIndex()));
+				
+		DefaultComboBoxModel<String> listmodel = new DefaultComboBoxModel<String>();
+		  listjogos.setModel(listmodel);
+	  listmodel.addElement(jogo.getTitulo());
+	  
+	  joguinho.gravargames(jogo, posicao);
+	  posicao++;
 				
 				
-				
-				
+	  if(posicao == joguinho.gettamanho()) {
+		  btnNewButtonsalvar.setEnabled(false);
+		  JOptionPane.showMessageDialog(null, "se Esgoto");
+	  }
+	  
+	  
 			}
 		});
-	    	
-	    
 	
 		
 		
@@ -233,6 +235,31 @@ btnNewButtonsalvar.addActionListener(new ActionListener() {
 		
 	    
 	}
-		
 	
+	private Consoles obterconsole(int consoleselect) {
+
+		// para descobrir o periodod do aluno
+
+		if (consoleselect == 0) {
+			return (Consoles.NITENDO);
+		} else if (consoleselect == 1) {
+			return (Consoles.PLAYSTATIOFIVE);
+		} else if (consoleselect == 2) {
+			return (Consoles.PLAYSTATIOFOR);
+		} else if (consoleselect == 3) {
+			return (Consoles.PLAYSTATION);
+		} else if(consoleselect == 4){
+			return (Consoles.PLAYSTATIONONE);
+		}else if(consoleselect == 5){
+			return (Consoles.PLAYSTATIOTWO);
+		}else if(consoleselect == 6){
+			return (Consoles.XBOX);
+		}else if(consoleselect == 7){
+			return (Consoles.XBOXONE);
+		}else {
+			return (Consoles.XBOXSERIEX);
+		}
+		
+		
+	}
 }
