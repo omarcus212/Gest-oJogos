@@ -43,13 +43,16 @@ public class Jogo {
 		this.console = console;
 	}
 
-	public String getValor() {
-		return valor;
+	public void setValor(double valor) {
+		valor = Integer.parseInt(this.valor);
+		
+	}
+	
+	public double getValor() {
+		return getValor();
 	}
 
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
+	
 
 	public String getObservacao() {
 		return observacao;

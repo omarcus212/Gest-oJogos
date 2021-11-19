@@ -10,6 +10,10 @@ public class RepositoryFabricante {
 	
 	private FabricanteDoJogo[] fabricante;
 	
+	FabricanteDoJogo f = new FabricanteDoJogo();
+	
+	
+	
 	
 	  public RepositoryFabricante() {
 	      fabricante = new FabricanteDoJogo[5];

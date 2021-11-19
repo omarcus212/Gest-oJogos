@@ -7,9 +7,10 @@ public class RepositoryJogo {
 
 	
 	private Jogo[] games; 
+	private String jogo;
 	  
-	public RepositoryJogo() {
-		games = new Jogo[100];
+	public RepositoryJogo(String jogo) {
+		this.jogo = jogo;
 		
 	}
 	

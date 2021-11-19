@@ -13,6 +13,7 @@ import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import br.senai.sp.jandira.Repository.RepositoryJogo;
 import br.senai.sp.jandira.Repositoryfabricante.RepositoryFabricante;
+import br.senai.sp.jandira.fabricante.FabricanteDoJogo;
 import br.senai.sp.jandira.jogo.Consoles;
 import br.senai.sp.jandira.jogo.Jogo;
 import br.senai.sp.jandira.jogo.QuantidadeZerado;
@@ -30,11 +31,13 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
+import javax.swing.DropMode;
+import javax.swing.JSeparator;
 
 public class Framejogo extends JFrame {
-	private JTextField textFieldnome;
+	private JTextField textFieltitulo;
 	private JTextField textField_valor;
-	private JTextField obseervçao;
+	private JTextPane txtobseervçao;
 	private int posicao = 0;
 	
 	public Framejogo() {
@@ -44,26 +47,38 @@ public class Framejogo extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		textFieldnome = new JTextField();
-		textFieldnome.setBounds(102, 39, 143, 17);
-		getContentPane().add(textFieldnome);
-		textFieldnome.setColumns(10);
+		textFieltitulo = new JTextField();
+		textFieltitulo.setBounds(102, 39, 143, 17);
+		getContentPane().add(textFieltitulo);
+		textFieltitulo.setColumns(10);
 		
 		textField_valor = new JTextField();
 		textField_valor.setColumns(10);
 		textField_valor.setBounds(111, 164, 86, 17);
 		getContentPane().add(textField_valor);
 		
-		obseervçao = new JTextField();
-		obseervçao.setColumns(10);
-		obseervçao.setBounds(102, 192, 160, 69);
-		getContentPane().add(obseervçao);
+		JLabel lblNewLabelnaoobrigatorio = new JLabel("(não obrigatorio!)");
+		lblNewLabelnaoobrigatorio.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabelnaoobrigatorio.setBackground(Color.RED);
+		lblNewLabelnaoobrigatorio.setForeground(Color.RED);
+		lblNewLabelnaoobrigatorio.setEnabled(false);
+		lblNewLabelnaoobrigatorio.setBounds(102, 183, 112, 17);
+		getContentPane().add(lblNewLabelnaoobrigatorio);
+		
+		txtobseervçao = new JTextPane();
+		txtobseervçao.setToolTipText("(opition)");
+		txtobseervçao.setBounds(102, 204, 160, 80);
+		getContentPane().add(txtobseervçao);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setToolTipText("");
 		scrollPane.setBounds(272, 39, 127, 214);
 		getContentPane().add(scrollPane);
 		
 		JList listjogos = new JList();
+		DefaultComboBoxModel<String> listdomodel = new DefaultComboBoxModel<String>();
+		
+	
 		scrollPane.setViewportView(listjogos);
 		
 		JLabel lblNewLabel = new JLabel("Nome do jogo:");
@@ -91,34 +106,33 @@ public class Framejogo extends JFrame {
 		getContentPane().add(lblValor);
 		
 		JLabel lblObservaes = new JLabel("Observa\u00E7\u00F5es:");
-		lblObservaes.setBounds(10, 192, 95, 14);
+		lblObservaes.setBounds(10, 204, 95, 14);
 		getContentPane().add(lblObservaes);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Quantas Vezes:");
 		lblNewLabel_3_1.setBounds(115, 102, 99, 14);
 		getContentPane().add(lblNewLabel_3_1);
 		
-		JButton btnNewButtonsalvar = new JButton("Salvar");
-		btnNewButtonsalvar.setForeground(new Color(240, 248, 255));
-		btnNewButtonsalvar.setBackground(new Color(75, 0, 130));
-		btnNewButtonsalvar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		/*tireado o action lisener criador do button salvar daqui*/
-		btnNewButtonsalvar.setBounds(44, 295, 89, 23);
-		getContentPane().add(btnNewButtonsalvar);
 		
-		JButton btnNewButton_1 = new JButton("<");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton_1.setForeground(new Color(240, 248, 255));
-		btnNewButton_1.setBackground(new Color(75, 0, 130));
-		btnNewButton_1.setBounds(283, 281, 46, 23);
-		getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton(">");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton_2.setForeground(new Color(240, 248, 255));
-		btnNewButton_2.setBackground(new Color(75, 0, 130));
-		btnNewButton_2.setBounds(339, 281, 46, 23);
-		getContentPane().add(btnNewButton_2);
+	
+		
+		JButton btnNewButtonsetaesquerda = new JButton("<");
+		btnNewButtonsetaesquerda.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButtonsetaesquerda.setForeground(new Color(240, 248, 255));
+		btnNewButtonsetaesquerda.setBackground(new Color(75, 0, 130));
+		btnNewButtonsetaesquerda.setBounds(283, 281, 46, 23);
+		getContentPane().add(btnNewButtonsetaesquerda);
+		
+		JButton btnNewButtonsetadireita = new JButton(">");
+		btnNewButtonsetadireita.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButtonsetadireita.setForeground(new Color(240, 248, 255));
+		btnNewButtonsetadireita.setBackground(new Color(75, 0, 130));
+		btnNewButtonsetadireita.setBounds(339, 281, 46, 23);
+		getContentPane().add(btnNewButtonsetadireita);
+		
+		
+
 		
 		/*coloquei o Enum de zerado ou não no combox para o fda escolher*/
 		JComboBox comboBoxZErado = new JComboBox();
@@ -133,7 +147,55 @@ public class Framejogo extends JFrame {
 		for(Zerado zerado : Zerado.values()) {
 			zeradomodel.addElement(zerado.getzerado());
 		}
-		comboBoxZErado.setModel(zeradomodel);
+		  /*aqui acaba*/
+		comboBoxZErado.setModel(new DefaultComboBoxModel(Zerado.values()));
+	    JComboBox comboBoxconsole = new JComboBox();
+	    comboBoxconsole.setFont(new Font("Tahoma", Font.BOLD, 11));
+	    comboBoxconsole.setForeground(new Color(240, 248, 255));
+	    comboBoxconsole.setEditable(true);
+	    comboBoxconsole.setBackground(new Color(75, 0, 130));
+	    DefaultComboBoxModel<String> consoles = new DefaultComboBoxModel<String>();
+	    comboBoxconsole.setBounds(67, 132, 116, 17);
+	    getContentPane().add(comboBoxconsole);
+	  
+	    
+	    for(Consoles c : Consoles.values()) {
+	    	consoles.addElement(c.getconsole());
+	    }
+	    comboBoxconsole.setModel(new DefaultComboBoxModel(Consoles.values()));
+	    
+	    /*aqui acaba*/
+	    listjogos.setModel(listdomodel);
+		
+		JButton btnNewButtonsalvar = new JButton("Salvar");
+		btnNewButtonsalvar.setForeground(new Color(240, 248, 255));
+		btnNewButtonsalvar.setBackground(new Color(75, 0, 130));
+		btnNewButtonsalvar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButtonsalvar.setBounds(44, 295, 89, 23);
+		getContentPane().add(btnNewButtonsalvar);
+		/*tireado o action lisener criador do button salvar daqui*/
+		btnNewButtonsalvar.addActionListener(new ActionListener() {
+			
+			/*e colocado aqui o action lisener do button salvar */
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Jogo jogo = new Jogo();
+				 jogo.setTitulo(textFieltitulo.getText());
+				 jogo.setObservacao(txtobseervçao.getText());
+				 jogo.setConsole(obterconsole(comboBoxconsole.getSelectedIndex()));;
+				 
+				 
+				listdomodel.addElement(jogo.getTitulo());
+				
+			
+				
+				  
+				
+		
+				
+			}
+		});
 		
 		/*aqui acaba*/
 		
@@ -144,9 +206,11 @@ public class Framejogo extends JFrame {
 		comboBoxquantidade.setForeground(new Color(240, 248, 255));
 		comboBoxquantidade.setBackground(new Color(75, 0, 130));
 		comboBoxquantidade.setBounds(211, 101, 36, 17);
-		comboBoxquantidade.addItem("1");comboBoxquantidade.addItem("2");
-		comboBoxquantidade.addItem("3");comboBoxquantidade.addItem("4");
-		comboBoxquantidade.addItem("5");
+		int vezes[] = {1,2,3,4,5}; 
+		  for( int c : vezes ) {
+			  comboBoxquantidade.addItem(c);		
+		    }
+		
 		getContentPane().add(comboBoxquantidade);
 
 		
@@ -156,8 +220,12 @@ public class Framejogo extends JFrame {
 		
 		/*aqui acaba*/
 	
-		String dias[] = { "EA sport", "Microsoft", "Xbox", "ActionVisa", "Sony" };
-
+	
+		FabricanteDoJogo ja = new FabricanteDoJogo();
+		ja.getNome();
+	
+		
+		
 		
 		JComboBox comboBoxFabrica = new JComboBox();
 		
@@ -165,77 +233,30 @@ public class Framejogo extends JFrame {
 		comboBoxFabrica.setForeground(new Color(240, 248, 255));
 		comboBoxFabrica.setEditable(true);
 		comboBoxFabrica.setBackground(new Color(75, 0, 130));
-		 DefaultComboBoxModel<String> conso1les = new DefaultComboBoxModel<String>(dias);
+		 DefaultComboBoxModel<String> conso1les = new DefaultComboBoxModel<String>();
 		 comboBoxFabrica.setModel(conso1les);
+		 conso1les.addElement(ja.getNome());
 		comboBoxFabrica.setBounds(80, 64, 108, 17);
 		getContentPane().add(comboBoxFabrica);
-	    ;
 	    
-
+		System.out.println();
+	    
+       
 		/*coloquei o Enum dos consoles para o fda escolher*/
 	    
-	    JComboBox comboBox = new JComboBox();
-	    comboBox.setFont(new Font("Tahoma", Font.BOLD, 11));
-	    comboBox.setForeground(new Color(240, 248, 255));
-	    comboBox.setEditable(true);
-	    comboBox.setBackground(new Color(75, 0, 130));
-	    DefaultComboBoxModel<String> consoles = new DefaultComboBoxModel<String>();
-	    comboBox.setBounds(67, 132, 116, 17);
-	    getContentPane().add(comboBox);
-	  
-	    
-	    for(Consoles c : Consoles.values()) {
-	    	consoles.addElement(c.getconsole());
-	    }
-	    comboBox.setModel(consoles);
-	    
-	    /*aqui acaba*/
-	    
-	    	
-	    /*e colocado aqui o action lisener do button salvar */
-	     
-	    RepositoryJogo joguinho = new RepositoryJogo();
-	    
-btnNewButtonsalvar.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				
-				Jogo jogo = new Jogo();
-		jogo.setTitulo(textFieldnome.getText());
-		jogo.setValor(textField_valor.getText());
-		jogo.setConsole(obterconsole(comboBox.getSelectedIndex()));
-				
-		DefaultComboBoxModel<String> listmodel = new DefaultComboBoxModel<String>();
-		  listjogos.setModel(listmodel);
-	  listmodel.addElement(jogo.getTitulo());
-	  
-	  joguinho.gravargames(jogo, posicao);
-	  posicao++;
-				
-				
-	  if(posicao == joguinho.gettamanho()) {
-		  btnNewButtonsalvar.setEnabled(false);
-		  JOptionPane.showMessageDialog(null, "se Esgoto");
-	  }
-	  
-	  
-			}
-		});
 	
+	    
+	    /*e colocado aqui o action lisener do button salvar */
+	 	
 		
 		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 	    
 	}
 	
+	   
 	private Consoles obterconsole(int consoleselect) {
 
 		// para descobrir o periodod do aluno
