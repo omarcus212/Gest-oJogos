@@ -10,6 +10,15 @@ public class Jogo {
 	private Consoles console;
 	private String valor;
 	private String observacao;
+	private QuantidadeZerado quantidade;
+
+	public QuantidadeZerado getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(QuantidadeZerado quantidade) {
+		this.quantidade = quantidade;
+	}
 
 	public String getTitulo() {
 		return titulo;

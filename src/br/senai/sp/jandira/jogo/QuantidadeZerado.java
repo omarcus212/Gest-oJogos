@@ -2,6 +2,7 @@ package br.senai.sp.jandira.jogo;
 
 public enum QuantidadeZerado {
 	
+	zero("0"),
 	um("1"), 
 	dois("2"), 
 	tres("3"),
