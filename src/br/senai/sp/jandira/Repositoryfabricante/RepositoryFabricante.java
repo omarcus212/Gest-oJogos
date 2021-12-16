@@ -15,9 +15,10 @@ public class RepositoryFabricante {
 	
 	
 	
+	
 	  public RepositoryFabricante() {
 	      fabricante = new FabricanteDoJogo[5];
-		 
+		
 	}
 		
 	  

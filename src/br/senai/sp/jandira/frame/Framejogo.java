@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.frame;
 
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
@@ -125,10 +127,9 @@ public class Framejogo extends JFrame {
 		comboBoxZErado.setBackground(new Color(75, 0, 130));
 		comboBoxZErado.setBounds(57, 100, 48, 17);
 		getContentPane().add(comboBoxZErado);
+		comboBoxZErado.setModel(zeradomodel);
 
-		for (Zerado zerado : Zerado.values()) {
-			zeradomodel.addElement(zerado.getzerado());
-		}
+
 		/* aqui acaba */
 		comboBoxZErado.setModel(new DefaultComboBoxModel(Zerado.values()));
 		JComboBox comboBoxconsole = new JComboBox();
@@ -144,6 +145,9 @@ public class Framejogo extends JFrame {
 			consoles.addElement(c.getconsole());
 		}
 
+		for(Zerado z : Zerado.values()) {
+			zeradomodel.addElement(z.getzerado());
+		}
 		comboBoxconsole.setModel(consoles);
 
 		/* aqui acaba */
@@ -191,7 +195,7 @@ public class Framejogo extends JFrame {
 		JButton btnNewButtonsalver = new JButton("Salver");
 		btnNewButtonsalver.setForeground(new Color(230, 230, 250));
 		btnNewButtonsalver.setBackground(new Color(75, 0, 130));
-		btnNewButtonsalver.setBounds(27, 308, 112, 23);
+		btnNewButtonsalver.setBounds(27, 294, 112, 23);
 		getContentPane().add(btnNewButtonsalver);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -200,25 +204,31 @@ public class Framejogo extends JFrame {
 
 		JList listjogo = new JList();
 		DefaultListModel<String> listgame = new DefaultListModel<String>();
+		
 		scrollPane.setViewportView(listjogo);
 		listjogo.setModel(listgame);
+	
 
 		JButton btnNewButtondeletar = new JButton("Deletar");
 		btnNewButtondeletar.setForeground(new Color(230, 230, 250));
 		btnNewButtondeletar.setBackground(new Color(75, 0, 130));
-		btnNewButtondeletar.setBounds(293, 315, 92, 23);
+		btnNewButtondeletar.setBounds(283, 315, 102, 23);
 		getContentPane().add(btnNewButtondeletar);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBackground(new Color(75, 0, 130));
+		btnLimpar.setForeground(Color.WHITE);
+		btnLimpar.setBounds(27, 328, 112, 23);
+		getContentPane().add(btnLimpar);
 
+		
 		FabricanteDoJogo fb = new FabricanteDoJogo();
-
 		String nome[] = fb.getNome();
+		 for(String n : nome) {
+			 conso1les.addElement(n);
+		 }
 
-		for (int i = 0; i < nome.length; i++) {
-
-			conso1les.addElement(nome[i]);
-
-		}
-
+		 
 		RepositoryJogo jogorepositorio = new RepositoryJogo();
 
 		btnNewButtonsalver.addActionListener(new ActionListener() {
@@ -229,32 +239,59 @@ public class Framejogo extends JFrame {
 				Jogo jogo = new Jogo();
 				jogo.setTitulo(textFieltitulo.getText());
 				jogo.setObservacao(textPaneobersa.getText());
-				jogo.setConsole(obterconsole(comboBoxconsole.getSelectedIndex()));
 				jogo.setZerado(obterzerado(comboBoxZErado.getSelectedIndex()));
 				listgame.addElement(jogo.getTitulo());
-
+             
+				
+				
 				jogorepositorio.gravargames(jogo, posicao);
 				posicao++;
 
+			;
+				
+				//int progesoo = jogo;
 			}
 		});
 
-		/*btnNewButtondeletar.addActionListener(new ActionListener() {
+		btnNewButtondeletar.addActionListener(new ActionListener() {
 
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				listgame.removeElement(textFieltitulo);
-				textFieltitulo.setText(null);
-				textFieltitulo.requestFocus();
-				listgame.removeAllElements();
-
-				listgame.removeElement(textPaneobersa);
-				textPaneobersa.setText(null);
-				textPaneobersa.requestFocus();
-
+				/**if(listjogo.getSelectedIndex() != -10) {
+				
+					int index = listjogo.getSelectionMode();
+					 listgame.removeElementAt(index);
+					  listgame.removeElement(jogorepositorio);
+					  
+						
+				}else{
+					JOptionPane.showMessageDialog(null, "selecione um jogo");
+				}*/
+				
+		
+			
+				//(listjogo.getSelectionMode());
+				
+ 			
 			}
-		});*/
-
+		});
+		
+		btnLimpar.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+			   	textFieltitulo.setText(null);
+			   	textPaneobersa.setText(null);
+			   	textField_valor.setText(null);
+				
+			}
+			
+			
+		});
+			
+		
 		listjogo.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -262,6 +299,11 @@ public class Framejogo extends JFrame {
 				
 				Jogo jogo = jogorepositorio.jogoslist(listjogo.getSelectedIndex());
 				textFieltitulo.setText(jogo.getTitulo());
+				textPaneobersa.setText(jogo.getObservacao());
+				comboBoxconsole.setSelectedIndex(jogo.getConsole().ordinal());
+				
+			
+			
 				
 				
 			}
@@ -272,6 +314,31 @@ public class Framejogo extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				if(listjogo.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null, "escolha um jogo na lista");
+				}else {
+					listjogo.setSelectedIndex(listjogo.getSelectedIndex()+1);
+				}
+			 
+				
+				
+			}
+		});
+		
+		btnNewButtonsetaesquerda.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				if(listjogo.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null, "escolha um jogo na lista");
+				}else {
+					listjogo.setSelectedIndex(listjogo.getSelectedIndex()-1);
+				}
+				
+			 
+				
+				
 			}
 		});
 
@@ -298,10 +365,10 @@ public class Framejogo extends JFrame {
 	}
 
 	private Zerado obterzerado(int zerado) {
-		if (zerado == 0) {
+		if (zerado == 1) {
 			return (Zerado.sim);
 		} else {
-			return (Zerado.sim);
+			return (Zerado.nao);
 		}
 	}
 

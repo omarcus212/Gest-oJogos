@@ -14,15 +14,15 @@ public class App {
 		frame.setVisible(true);
 		
 
-		FabricanteDoJogo fb = new FabricanteDoJogo();
+	/*	FabricanteDoJogo fb = new FabricanteDoJogo();
 		
 		String nome[] = fb.getNome();
 		
 
 	for (int i = 0; i < nome.length; i++) {
 		System.out.println(nome[i]);
-		
-	}
+		*/
+	
 
 
 	} 
