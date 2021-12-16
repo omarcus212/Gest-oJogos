@@ -119,9 +119,10 @@ public class Framejogo extends JFrame {
 		getContentPane().add(btnNewButtonsetadireita);
 
 		/* coloquei o Enum de zerado ou não no combox para o fda escolher */
-		JComboBox comboBoxZErado = new JComboBox();
+		JComboBox comboBoxZerado = new JComboBox();
 		DefaultComboBoxModel<String> zeradomodel = new DefaultComboBoxModel<String>();
 
+<<<<<<< HEAD
 		comboBoxZErado.setEditable(true);
 		comboBoxZErado.setForeground(new Color(245, 245, 245));
 		comboBoxZErado.setBackground(new Color(75, 0, 130));
@@ -129,9 +130,16 @@ public class Framejogo extends JFrame {
 		getContentPane().add(comboBoxZErado);
 		comboBoxZErado.setModel(zeradomodel);
 
+=======
+		comboBoxZerado.setEditable(true);
+		comboBoxZerado.setForeground(new Color(245, 245, 245));
+		comboBoxZerado.setBackground(new Color(75, 0, 130));
+		comboBoxZerado.setBounds(57, 100, 48, 17);
+		getContentPane().add(comboBoxZerado);
+>>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
 
 		/* aqui acaba */
-		comboBoxZErado.setModel(new DefaultComboBoxModel(Zerado.values()));
+		comboBoxZerado.setModel(new DefaultComboBoxModel(Zerado.values()));
 		JComboBox comboBoxconsole = new JComboBox();
 		comboBoxconsole.setFont(new Font("Tahoma", Font.BOLD, 11));
 		comboBoxconsole.setForeground(new Color(240, 248, 255));
@@ -239,7 +247,12 @@ public class Framejogo extends JFrame {
 				Jogo jogo = new Jogo();
 				jogo.setTitulo(textFieltitulo.getText());
 				jogo.setObservacao(textPaneobersa.getText());
+<<<<<<< HEAD
 				jogo.setZerado(obterzerado(comboBoxZErado.getSelectedIndex()));
+=======
+				jogo.setConsole(obterconsole(comboBoxconsole.getSelectedIndex()));
+				jogo.setZerado(obterzerado(comboBoxZerado.getSelectedIndex()));
+>>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
 				listgame.addElement(jogo.getTitulo());
              
 				
@@ -277,6 +290,7 @@ public class Framejogo extends JFrame {
  			
 			}
 		});
+<<<<<<< HEAD
 		
 		btnLimpar.addActionListener(new ActionListener() {
 			
@@ -292,6 +306,9 @@ public class Framejogo extends JFrame {
 		});
 			
 		
+=======
+
+>>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
 		listjogo.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -301,10 +318,14 @@ public class Framejogo extends JFrame {
 				textFieltitulo.setText(jogo.getTitulo());
 				textPaneobersa.setText(jogo.getObservacao());
 				comboBoxconsole.setSelectedIndex(jogo.getConsole().ordinal());
+<<<<<<< HEAD
 				
 			
 			
 				
+=======
+			    comboBoxZerado.setSelectedIndex(jogo.getZerado().ordinal());
+>>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
 				
 			}
 		});
