@@ -52,13 +52,13 @@ public class Jogo {
 		this.console = console;
 	}
 
-	public void setValor(double valor) {
-		valor = Integer.parseInt(this.valor);
+	public void setValor(String valor) {
+		this.valor = valor;
 		
 	}
 	
-	public double getValor() {
-		return getValor();
+	public String getValor() {
+		return valor;
 	}
 
 	

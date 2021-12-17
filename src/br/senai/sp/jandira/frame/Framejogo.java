@@ -33,6 +33,8 @@ import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
@@ -122,21 +124,21 @@ public class Framejogo extends JFrame {
 		JComboBox comboBoxZerado = new JComboBox();
 		DefaultComboBoxModel<String> zeradomodel = new DefaultComboBoxModel<String>();
 
-<<<<<<< HEAD
-		comboBoxZErado.setEditable(true);
-		comboBoxZErado.setForeground(new Color(245, 245, 245));
-		comboBoxZErado.setBackground(new Color(75, 0, 130));
-		comboBoxZErado.setBounds(57, 100, 48, 17);
-		getContentPane().add(comboBoxZErado);
-		comboBoxZErado.setModel(zeradomodel);
 
-=======
 		comboBoxZerado.setEditable(true);
 		comboBoxZerado.setForeground(new Color(245, 245, 245));
 		comboBoxZerado.setBackground(new Color(75, 0, 130));
 		comboBoxZerado.setBounds(57, 100, 48, 17);
 		getContentPane().add(comboBoxZerado);
->>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
+		comboBoxZerado.setModel(zeradomodel);
+
+
+		comboBoxZerado.setEditable(true);
+		comboBoxZerado.setForeground(new Color(245, 245, 245));
+		comboBoxZerado.setBackground(new Color(75, 0, 130));
+		comboBoxZerado.setBounds(57, 100, 48, 17);
+		getContentPane().add(comboBoxZerado);
+
 
 		/* aqui acaba */
 		comboBoxZerado.setModel(new DefaultComboBoxModel(Zerado.values()));
@@ -189,8 +191,8 @@ public class Framejogo extends JFrame {
 		comboBoxFabrica.setEditable(true);
 		comboBoxFabrica.setBackground(new Color(75, 0, 130));
 
-		DefaultComboBoxModel<String> conso1les = new DefaultComboBoxModel<String>();
-		comboBoxFabrica.setModel(conso1les);
+		DefaultComboBoxModel<String> combofrabica = new DefaultComboBoxModel<String>();
+		comboBoxFabrica.setModel(combofrabica);
 		comboBoxFabrica.setBounds(80, 64, 108, 17);
 		getContentPane().add(comboBoxFabrica);
 
@@ -228,15 +230,33 @@ public class Framejogo extends JFrame {
 		btnLimpar.setForeground(Color.WHITE);
 		btnLimpar.setBounds(27, 328, 112, 23);
 		getContentPane().add(btnLimpar);
+		
+		JButton btnNewButtonsair = new JButton("Sair");
+		btnNewButtonsair.setForeground(Color.WHITE);
+		btnNewButtonsair.setBackground(new Color(75, 0, 130));
+		btnNewButtonsair.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButtonsair.setBounds(394, 281, 80, 57);
+		getContentPane().add(btnNewButtonsair);
 
 		
+		btnNewButtonsair.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			Framejogo frame =  new Framejogo();
+			
+				System.exit(frame.EXIT_ON_CLOSE);
+ 			
+			}
+		});; 
+		
 		FabricanteDoJogo fb = new FabricanteDoJogo();
-		String nome[] = fb.getNome();
-		 for(String n : nome) {
-			 conso1les.addElement(n);
-		 }
-
-		 
+		RepositoryFabricante fabricantes = new RepositoryFabricante();
+		
+		for(FabricanteDoJogo fabricante : fabricantes.getFabricantes()) {
+			combofrabica.addElement(fabricante.getNome());
+		}
+		
+		
 		RepositoryJogo jogorepositorio = new RepositoryJogo();
 
 		btnNewButtonsalver.addActionListener(new ActionListener() {
@@ -247,22 +267,19 @@ public class Framejogo extends JFrame {
 				Jogo jogo = new Jogo();
 				jogo.setTitulo(textFieltitulo.getText());
 				jogo.setObservacao(textPaneobersa.getText());
-<<<<<<< HEAD
-				jogo.setZerado(obterzerado(comboBoxZErado.getSelectedIndex()));
-=======
 				jogo.setConsole(obterconsole(comboBoxconsole.getSelectedIndex()));
 				jogo.setZerado(obterzerado(comboBoxZerado.getSelectedIndex()));
->>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
+                jogo.setQuantidade(obterquantidadezerado(comboBoxquantidade.getSelectedIndex()));
+                jogo.setFabrincante(fabricantes.listarFabricantes(comboBoxFabrica.getSelectedIndex()));
 				listgame.addElement(jogo.getTitulo());
              
-				
 				
 				jogorepositorio.gravargames(jogo, posicao);
 				posicao++;
 
 			;
 				
-				//int progesoo = jogo;
+				
 			}
 		});
 
@@ -272,11 +289,15 @@ public class Framejogo extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/**if(listjogo.getSelectedIndex() != -10) {
 				
-					int index = listjogo.getSelectionMode();
-					 listgame.removeElementAt(index);
-					  listgame.removeElement(jogorepositorio);
+				
+			int bla =	listjogo.getSelectedIndex();
+			
+			System.out.println(bla);
+				
+				/*if() {
+				
+					listjogo.remove(bla);
 					  
 						
 				}else{
@@ -290,7 +311,7 @@ public class Framejogo extends JFrame {
  			
 			}
 		});
-<<<<<<< HEAD
+
 		
 		btnLimpar.addActionListener(new ActionListener() {
 			
@@ -299,6 +320,7 @@ public class Framejogo extends JFrame {
 			   	textFieltitulo.setText(null);
 			   	textPaneobersa.setText(null);
 			   	textField_valor.setText(null);
+				textField_valor.setText(getName());
 				
 			}
 			
@@ -306,9 +328,9 @@ public class Framejogo extends JFrame {
 		});
 			
 		
-=======
 
->>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
+
+
 		listjogo.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -318,15 +340,10 @@ public class Framejogo extends JFrame {
 				textFieltitulo.setText(jogo.getTitulo());
 				textPaneobersa.setText(jogo.getObservacao());
 				comboBoxconsole.setSelectedIndex(jogo.getConsole().ordinal());
-<<<<<<< HEAD
-				
-			
-			
-				
-=======
+				comboBoxquantidade.setSelectedIndex(jogo.getQuantidade().ordinal());
 			    comboBoxZerado.setSelectedIndex(jogo.getZerado().ordinal());
->>>>>>> 84ad882ea78c9b5e9b7896edd7e8979f41d254cf
-				
+                comboBoxFabrica.setSelectedIndex(fabricantes.getIndex(jogo.getFabrincante()));
+				textField_valor.setText(jogo.getValor());
 			}
 		});
 
@@ -362,7 +379,8 @@ public class Framejogo extends JFrame {
 				
 			}
 		});
-
+		
+		
 		/* coloquei o Enum dos consoles para o fda escolher */
 
 		/* e colocado aqui o action lisener do button salvar */
@@ -398,23 +416,23 @@ public class Framejogo extends JFrame {
 		// para descobrir o periodod do aluno
 
 		if (consoleselect == 0) {
-			return (Consoles.NITENDO);
-		} else if (consoleselect == 1) {
-			return (Consoles.PLAYSTATIOFIVE);
-		} else if (consoleselect == 2) {
-			return (Consoles.PLAYSTATIOFOR);
-		} else if (consoleselect == 3) {
-			return (Consoles.PLAYSTATION);
-		} else if (consoleselect == 4) {
-			return (Consoles.PLAYSTATIONONE);
-		} else if (consoleselect == 5) {
-			return (Consoles.PLAYSTATIOTWO);
-		} else if (consoleselect == 6) {
 			return (Consoles.XBOX);
-		} else if (consoleselect == 7) {
+		} else if (consoleselect == 1) {
 			return (Consoles.XBOXONE);
-		} else {
+		} else if (consoleselect == 2) {
 			return (Consoles.XBOXSERIEX);
+		} else if (consoleselect == 3) {
+			return (Consoles.PLAYSTATIONONE);
+		} else if (consoleselect == 4) {
+			return (Consoles.PLAYSTATIOTWO);
+		} else if (consoleselect == 5) {
+			return (Consoles.PLAYSTATIOFOR);
+		} else if (consoleselect == 6) {
+			return (Consoles.PLAYSTATIOFIVE);
+		} else if (consoleselect == 7) {
+			return (Consoles.PLAYSTATION);
+		} else {
+			return (Consoles.NITENDO);
 		}
 
 	}

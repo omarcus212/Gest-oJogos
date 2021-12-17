@@ -1,29 +1,35 @@
 package br.senai.sp.jandira.fabricante;
 
+import java.time.LocalDate;
+
 public class FabricanteDoJogo {
 
-	private String nome[] = new String[6];
+	
 	//private String local;
 	//private String numero;
 	//private String email;
 	
  
 	
-	public FabricanteDoJogo() {
-		
-		this.nome[0] = "Activision";
-		this.nome[1] = "Nitendo";
-		this.nome[2] = "Sega";
-		this.nome[3] = "Xbox";
-		this.nome[4] = "Caprice";
-		this.nome[5] = "Playsatiton";
+	private String nome;
+	private LocalDate dataFundação;
+	
+	
+	
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
-
-	public String[] getNome() {
+	public String getNome() {
+		return nome;
+	}
 	
-		return this.nome;
-		
+	public void setDataFundação(LocalDate dataFundação) {
+		this.dataFundação = dataFundação;
+	}
+	
+	public LocalDate getDataFundação() {
+		return dataFundação;
 	}
 	
 	
